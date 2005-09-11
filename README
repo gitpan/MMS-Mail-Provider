@@ -1,0 +1,20 @@
+MMS-Mail-Provider
+
+This static class provides a parse method for parsing an MMS::MailMessage into an MMS::MailMessage::ProviderParsed message for 'generic' MMS messages (or ones that cannot be identified as coming from a specific provider).
+
+INSTALLATION
+
+To install this module, run the following commands:
+
+    perl Makefile.PL
+    make
+    make test
+    make install
+
+
+COPYRIGHT AND LICENCE
+
+Copyright (C) 2005 Rob Lee
+
+This program is free software; you can redistribute it and/or modify it
+under the same terms as Perl itself.
