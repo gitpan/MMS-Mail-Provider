@@ -11,11 +11,11 @@ MMS::Mail::Provider - This provides a default class for parsing an MMS::Mail::Me
 
 =head1 VERSION
 
-Version 0.01
+Version 0.02
 
 =cut
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 =head1 SYNOPSIS
 
@@ -41,7 +41,11 @@ Return a new MMS::Mail::Provider object.
 
 =item parse MMS::Mail::Message
 
-The parse method can be called as a class method or an instance method, normally it will be invoked as a class method.  It parses the MMS::Mail::Message and returns an MMS::Mail::Message::Parsed.
+The parse method is called as an instance method.  It parses the MMS::Mail::Message and returns an MMS::Mail::Message::Parsed.
+
+=item retrieve_phone_number STRING
+
+This method splits the provided string on @ and returns the first list element from the split, replacing any leading + character with 00.  This seems to be the convention used by most UK providers and may work for other providers.
 
 =back
 
@@ -76,6 +80,10 @@ Copyright 2005 Rob Lee, all rights reserved.
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
 
+=head1 SEE ALSO
+
+L<MMS::Mail::Message>, L<MMS::Mail::Message::Parsed>, L<MMS::Mail::Provider>, L<MMS::Mail::Provider>
+
 =cut
 
 sub new {
@@ -88,11 +96,7 @@ sub new {
 
 sub parse {
 
-  my $self;
-  if (_is_object(@_)) {
-    $self = shift;
-  }
-
+  my $self = shift;
   my $message = shift;
 
   my $parsed =  new MMS::Mail::Message::Parsed($message);
@@ -104,17 +108,29 @@ sub parse {
 
 }
 
-sub _is_object {
+sub retrieve_phone_number {
 
-  my @args = @_;
+  my $self = shift;
+  my $from = shift;
 
-  my ($package, $filename, $line) = caller;
+  unless (defined($from)) {
+    return undef;
+  }
 
-  if (scalar @args>0) {
-    return 1 if (UNIVERSAL::isa($args[0], $package));
-  } 
-  return 0;
+  # Set mobile number property to a VALID number
+  #
+  # This works on the idea the form is in format
+  # 0000000000@someprovider.net
+  #
  
+  my ($number, undef) = split /\@/, $from;
+  if ($number =~ /^\+/) {
+    $number =~ s/^\+/00/;
+  } else {
+    $number = "00".$number;
+  }
+  return $number;
+
 }
 
 
