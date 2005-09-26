@@ -11,11 +11,11 @@ MMS::Mail::Provider - This provides a default class for parsing an MMS::Mail::Me
 
 =head1 VERSION
 
-Version 0.02
+Version 0.03
 
 =cut
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 =head1 SYNOPSIS
 
@@ -100,6 +100,9 @@ sub parse {
   my $message = shift;
 
   my $parsed =  new MMS::Mail::Message::Parsed($message);
+
+  $parsed->header_subject($message->header_subject);
+  $parsed->body_text($message->body_text);
 
   $parsed->images($parsed->retrieve_attachments('^image'));
   $parsed->videos($parsed->retrieve_attachments('^video'));

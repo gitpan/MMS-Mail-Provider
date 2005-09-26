@@ -1,7 +1,9 @@
 Revision history for MMS-Mail-Provider
 
+0.03    26-Sep-2005 / 14:05
+	Added code to populate the header_subject and body_text properties for the returned MMS::Mail::Message::Parsed object.
 0.02    17-Sep-2005 / 17:55
-        Added retrieve_phone_number method for parsing from strings and returning a valid phone number
+        Added retrieve_phone_number method for parsing from strings and returning a valid phone number.
 0.01    11-Sep-2005 / 19:10
         First version, released on an unsuspecting world.
 
