@@ -1,5 +1,7 @@
 Revision history for MMS-Mail-Provider
 
+0.04	29-Sep-2005 / 11.20
+	Improved pod by adding formatting codes
 0.03    26-Sep-2005 / 14:05
 	Added code to populate the header_subject and body_text properties for the returned MMS::Mail::Message::Parsed object.
 0.02    17-Sep-2005 / 17:55
