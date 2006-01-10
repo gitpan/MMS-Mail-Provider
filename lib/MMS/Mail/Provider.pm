@@ -7,15 +7,15 @@ use MMS::Mail::Message::Parsed;
 
 =head1 NAME
 
-MMS::Mail::Provider - This provides a default class for parsing an MMS::Mail::Message object into a MMS::Mail::Message::Parsed object.
+MMS::Mail::Provider - This provides a base class for parsing an MMS::Mail::Message object into a MMS::Mail::Message::Parsed object.
 
 =head1 VERSION
 
-Version 0.04
+Version 0.05
 
 =cut
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 =head1 SYNOPSIS
 
@@ -41,17 +41,17 @@ Return a new MMS::Mail::Provider object.
 
 =item C<parse> MMS::Mail::Message
 
-The C<parse> method is called as an instance method.  It parses the MMS::Mail::Message and returns an MMS::Mail::Message::Parsed.
+Instance method - The C<parse> method parses the MMS::Mail::Message and returns an MMS::Mail::Message::Parsed.
 
 =item C<retrieve_phone_number> STRING
 
-This method splits the provided string on @ and returns the first list element from the split, replacing any leading + character with 00.  This seems to be the convention used by most UK providers and may work for other providers.
+Instance method - This method splits the provided string on @ and returns the first list element from the split, replacing any leading + character with 00.  This seems to be the convention used by most UK providers and may work for other non-UK providers.
 
 =back
 
 =head1 AUTHOR
 
-Rob Lee, C<< <robl@robl.co.uk> >>
+Rob Lee, C<< <robl at robl.co.uk> >>
 
 =head1 BUGS
 
@@ -99,7 +99,7 @@ sub parse {
   my $self = shift;
   my $message = shift;
 
-  my $parsed =  new MMS::Mail::Message::Parsed($message);
+  my $parsed =  new MMS::Mail::Message::Parsed( message=>$message);
 
   $parsed->header_subject($message->header_subject);
   $parsed->body_text($message->body_text);
