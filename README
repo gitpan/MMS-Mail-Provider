@@ -3,7 +3,7 @@ NAME
     MMS::Mail::Message object into a MMS::Mail::Message::Parsed object.
 
 VERSION
-    Version 0.06
+    Version 0.07
 
 SYNOPSIS
     This class provides a parse method for parsing an MMS::Mail::Message

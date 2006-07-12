@@ -11,11 +11,11 @@ MMS::Mail::Provider - This provides a base class for parsing an MMS::Mail::Messa
 
 =head1 VERSION
 
-Version 0.06
+Version 0.07
 
 =cut
 
-our $VERSION = '0.06';
+our $VERSION = '0.07';
 
 =head1 SYNOPSIS
 
@@ -132,7 +132,10 @@ sub retrieve_phone_number {
   } else {
     $number = "00".$number;
   }
-  return $number;
+  unless ($number =~ /\D+/) {
+    return $number;
+  } 
+  return undef;
 
 }
 
